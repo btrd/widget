@@ -48,6 +48,17 @@ void CMainFrame::CreateMyToolbar() {
   SetToolBar(m_toolbar);
 }
 
+void CMainFrame::ShowToolbar() {
+  m_toolbar->Show();
+}
+
+void CMainFrame::HideToolbar() {
+  m_toolbar->Hide();
+}
+bool CMainFrame::GetVisibility() {
+  return m_toolbar->IsShownOnScreen();
+}
+
 void CMainFrame::OnNew(wxCommandEvent& event) {
 
 }
@@ -84,7 +95,11 @@ void CMainFrame::OnVersion(wxCommandEvent& event) {
   vdlg.ShowModal();
 }
 void CMainFrame::OnToolbar(wxCommandEvent& event) {
-
+  if (GetVisibility()) {
+    HideToolbar();
+  } else {
+    ShowToolbar();
+  }
 }
 void CMainFrame::OnTools(wxCommandEvent& event) {
 

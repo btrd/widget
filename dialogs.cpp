@@ -37,7 +37,7 @@ wxDialog( parent, id, title)
 
   wxStaticText *item1 = new wxStaticText(this, EPAISSEUR_TEXT, wxT("Choisir l'épaisseur de trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxSlider *item2 = new wxSlider(this, EPAISSEUR_SLIDER, 1, 1, 10, wxDefaultPosition, wxSize(200, 50), wxALIGN_CENTRE );
+  wxSlider *item2 = new wxSlider(this, EPAISSEUR_SLIDER, 1, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
 
   wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 

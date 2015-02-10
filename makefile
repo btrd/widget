@@ -14,3 +14,7 @@ dialogs.o : dialogs.cpp
 
 clean : 
 	rm -f *.o drawtri
+
+run :
+	make
+	./drawtri

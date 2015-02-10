@@ -10,6 +10,9 @@ class CMainFrame: public wxFrame {
   public:
   	CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
     void CreateMyToolbar();
+    void ShowToolbar();
+    void HideToolbar();
+    bool GetVisibility();
 
   private:
 

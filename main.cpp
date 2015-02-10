@@ -46,9 +46,9 @@ bool MyApp::OnInit()
   help_menu->Append(MENU_VERSION, wxT("Version"));
  
   display_menu->AppendCheckItem(MENU_TOOLBAR, wxT("Barre d'outils"));
-  //display_menu->Check(MENU_TOOLBAR,TRUE);
+  display_menu->Check(MENU_TOOLBAR,TRUE);
 
-  //menu_bar->Enable(MENU_TRIANGLE,false);
+  menu_bar->Enable(MENU_TRIANGLE,false);
   
   m_MainFrame->SetMenuBar(menu_bar);
 
