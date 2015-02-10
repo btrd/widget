@@ -1,0 +1,53 @@
+
+#ifndef __DIALOGS_H__
+#define __DIALOGS_H__
+
+enum { VERSION_TEXT=10000, EPAISSEUR_TEXT, EPAISSEUR_SLIDER, COLOR_TEXT, COLOR_RADIO, TRIANGLE_LIST, BUTTON_PROP, BUTTON_DELETE, ID_PROP_TEXT, EPAISSEUR_PROP_TEXT, PROP_CTRL, PROP_SPIN};
+
+class VersionDialog: public wxDialog
+{
+  public :
+    VersionDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+  
+  private :
+    DECLARE_EVENT_TABLE();
+};
+
+class EpaisseurDialog: public wxDialog
+{
+  public :
+    EpaisseurDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+  
+  private :
+    DECLARE_EVENT_TABLE();
+};
+
+class ColorDialog: public wxDialog
+{
+  public :
+    ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+  
+  private :
+    DECLARE_EVENT_TABLE();
+};
+
+class TriangleDialog: public wxDialog
+{
+  public :
+    TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    wxListBox * getListBox();
+  private :
+    DECLARE_EVENT_TABLE();
+    wxListBox *listBox;
+};
+
+class PropDialog: public wxDialog
+{
+  public :
+    PropDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+  
+  private :
+    DECLARE_EVENT_TABLE();
+};
+
+#endif
