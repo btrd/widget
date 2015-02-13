@@ -6,42 +6,42 @@ enum { VERSION_TEXT=10000, EPAISSEUR_TEXT, EPAISSEUR_SLIDER, COLOR_TEXT, COLOR_R
 
 class VersionDialog: public wxDialog
 {
-  public :
+  public:
     VersionDialog(wxWindow *parent, wxWindowID id, const wxString &title);
   
-  private :
+  private:
     DECLARE_EVENT_TABLE();
 };
 
 class EpaisseurDialog: public wxDialog
 {
-  public :
+  public:
     EpaisseurDialog(wxWindow *parent, wxWindowID id, const wxString &title);
     int getEpaisseur();
 
-  private :
+  private:
     DECLARE_EVENT_TABLE();
     wxSlider *epaisseurSlider;
 };
 
 class ColorDialog: public wxDialog
 {
-  public :
+  public:
     ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title);
     wxColour* getColor();
     
-  private :
+  private:
     DECLARE_EVENT_TABLE();
     wxRadioBox *colorRadio;
 };
 
 class TriangleDialog: public wxDialog
 {
-  public :
+  public:
     TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title);
     wxListBox * getListBox();
 
-  private :
+  private:
     DECLARE_EVENT_TABLE();
     wxListBox *listBox;
     void OnProp(wxCommandEvent& event);
@@ -49,11 +49,18 @@ class TriangleDialog: public wxDialog
 
 class PropDialog: public wxDialog
 {
-  public :
+  public:
     PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId);
   
-  private :
+  private:
     DECLARE_EVENT_TABLE();
+};
+
+class FileDialog: public wxFileDialog
+{
+  public:
+    FileDialog(wxWindow* parent, const wxString& message, const wxString& defaultDir, const wxString& defaultFile, const wxString& wildcard, long style);
+  
 };
 
 #endif

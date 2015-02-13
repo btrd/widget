@@ -170,3 +170,7 @@ wxDialog( parent, id, title)
   item0->Fit( this );
   item0->SetSizeHints( this );
 }
+
+FileDialog::FileDialog(wxWindow* parent, const wxString& message, const wxString& defaultDir, const wxString& defaultFile, const wxString& wildcard, long style) : wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style)
+{
+}

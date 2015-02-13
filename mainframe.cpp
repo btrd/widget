@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <wx/wx.h>
 #include <wx/accel.h>
+#include <fstream>
 
 #include "mainframe.h"
 #include "dialogs.h"
@@ -26,6 +27,7 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
   epaisseurtraitcourante = 5;
   couleurcourante = new wxColour(wxT("red"));
   is_drawing = FALSE;
+  num_tri = 0;
 }
 
 int CMainFrame::getEpaisseur() {
@@ -83,13 +85,17 @@ bool CMainFrame::GetVisibility() {
 }
 
 void CMainFrame::OnNew(wxCommandEvent& event) {
-
+  FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxOPEN);
+  vdlg.ShowModal();
 }
 void CMainFrame::OnOpen(wxCommandEvent& event) {
-
+  FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxOPEN);
+  vdlg.ShowModal();
+  std::ifstream fo(vdlg.GetPath().fn_str(), std::ios::in);
 }
 void CMainFrame::OnSave(wxCommandEvent& event) {
-
+  FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxSAVE|wxFD_OVERWRITE_PROMPT );
+  vdlg.ShowModal();
 }
 void CMainFrame::OnQuit(wxCommandEvent& event) {
   Close(TRUE);

@@ -3,6 +3,7 @@
 #define __MAINFRAME_H__
 
 #include "wx/wx.h"
+#include "triangle.h"
 
 enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_SIZE, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW };
 
@@ -25,6 +26,8 @@ class CMainFrame: public wxFrame {
     int epaisseurtraitcourante;
     wxColour *couleurcourante;
     bool is_drawing;
+    int num_tri;
+    Triangle tab_tri [5];
 
   	DECLARE_EVENT_TABLE();
 
