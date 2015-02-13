@@ -17,18 +17,22 @@ class EpaisseurDialog: public wxDialog
 {
   public :
     EpaisseurDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-  
+    int getEpaisseur();
+
   private :
     DECLARE_EVENT_TABLE();
+    wxSlider *epaisseurSlider;
 };
 
 class ColorDialog: public wxDialog
 {
   public :
     ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-  
+    wxColour* getColor();
+    
   private :
     DECLARE_EVENT_TABLE();
+    wxRadioBox *colorRadio;
 };
 
 class TriangleDialog: public wxDialog
@@ -36,9 +40,11 @@ class TriangleDialog: public wxDialog
   public :
     TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title);
     wxListBox * getListBox();
+
   private :
     DECLARE_EVENT_TABLE();
     wxListBox *listBox;
+    void OnProp(wxCommandEvent& event);
 };
 
 class PropDialog: public wxDialog

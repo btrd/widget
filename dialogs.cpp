@@ -37,18 +37,21 @@ wxDialog( parent, id, title)
 
   wxStaticText *item1 = new wxStaticText(this, EPAISSEUR_TEXT, wxT("Choisir l'épaisseur de trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxSlider *item2 = new wxSlider(this, EPAISSEUR_SLIDER, 1, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
+  epaisseurSlider = new wxSlider(this, EPAISSEUR_SLIDER, 1, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
 
   wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 
   item0->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
-  item0->Add( item2, 0, wxALIGN_CENTRE|wxALL, 5 );
+  item0->Add( epaisseurSlider, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
 
   this->SetAutoLayout( TRUE );
   this->SetSizer( item0 );
   item0->Fit( this );
   item0->SetSizeHints( this );
+}
+int EpaisseurDialog::getEpaisseur() {
+  return epaisseurSlider->GetValue();
 }
 
 BEGIN_EVENT_TABLE(ColorDialog, wxDialog)
@@ -61,13 +64,13 @@ wxDialog( parent, id, title)
 
   wxStaticText *item1 = new wxStaticText(this, COLOR_TEXT, wxT("Choisir la couleur"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxString strs8[] = { wxT("Rouge"), wxT("Vert"), wxT("Bleu") };
-  wxRadioBox *item2 = new wxRadioBox(this, COLOR_RADIO, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, strs8);
+  wxString strs8[] = { wxT("Red"), wxT("Green"), wxT("Blue") };
+  colorRadio = new wxRadioBox(this, COLOR_RADIO, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, strs8);
 
   wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 
   item0->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
-  item0->Add( item2, 0, wxALIGN_CENTRE|wxALL, 5 );
+  item0->Add( colorRadio, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
 
   this->SetAutoLayout( TRUE );
@@ -76,7 +79,13 @@ wxDialog( parent, id, title)
   item0->SetSizeHints( this );
 }
 
+wxColour* ColorDialog::getColor() {
+  wxColour* c = new wxColour(colorRadio->GetStringSelection());
+  return c;
+}
+
 BEGIN_EVENT_TABLE(TriangleDialog, wxDialog)
+  EVT_BUTTON(BUTTON_PROP, TriangleDialog::OnProp)
 END_EVENT_TABLE ()
 
 TriangleDialog::TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
@@ -116,6 +125,11 @@ wxListBox* TriangleDialog::getListBox()
   return this->listBox;
 }
 
+void TriangleDialog::OnProp(wxCommandEvent& event) {
+  PropDialog vdlg(this, -1, wxT("Propriétés"));
+  vdlg.ShowModal();
+}
+
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
 END_EVENT_TABLE ()
 
@@ -132,14 +146,14 @@ wxDialog( parent, id, title)
 
   wxStaticText *item5 = new wxStaticText(this, EPAISSEUR_PROP_TEXT, wxT("Epaisseur du trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxSpinCtrl *item6 = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 5, 1);
+  wxSpinCtrl *item6 = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, 1);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item4, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item5, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item6, 0, wxALIGN_CENTRE|wxALL, 5 );
 
-  wxString strs8[] = { wxT("Rouge"), wxT("Vert"), wxT("Bleu") };
+  wxString strs8[] = { wxT("Red"), wxT("Green"), wxT("Blue") };
   wxRadioBox *item7 = new wxRadioBox(this, COLOR_RADIO, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, strs8);
 
   item2->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );

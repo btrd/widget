@@ -13,10 +13,18 @@ class CMainFrame: public wxFrame {
     void ShowToolbar();
     void HideToolbar();
     bool GetVisibility();
+    int getEpaisseur();
+    void setEpaisseur(int e);
+    wxColour* getCouleur();
+    void setCouleur(wxColour* c);
+    bool getDrawing();
 
   private:
 
     wxToolBar *m_toolbar;
+    int epaisseurtraitcourante;
+    wxColour *couleurcourante;
+    bool is_drawing;
 
   	DECLARE_EVENT_TABLE();
 
@@ -31,6 +39,7 @@ class CMainFrame: public wxFrame {
     void OnToolbar(wxCommandEvent& event);
     void OnTools(wxCommandEvent& event);
     void OnDraw(wxCommandEvent& event);
+    void OnColor1(wxCommandEvent& event);
 };
 
 #endif

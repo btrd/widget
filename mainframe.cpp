@@ -23,7 +23,30 @@ END_EVENT_TABLE()
 CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame((wxFrame *)NULL, -1, title, pos, size) 
 {
-} //constructor
+  epaisseurtraitcourante = 5;
+  couleurcourante = new wxColour(wxT("red"));
+  is_drawing = FALSE;
+}
+
+int CMainFrame::getEpaisseur() {
+  return epaisseurtraitcourante;
+}
+
+void CMainFrame::setEpaisseur(int e) {
+  epaisseurtraitcourante = e;
+}
+
+wxColour* CMainFrame::getCouleur() {
+  return couleurcourante;
+}
+
+void CMainFrame::setCouleur(wxColour* c) {
+  couleurcourante = c;
+}
+
+bool CMainFrame::getDrawing() {
+  return epaisseurtraitcourante;
+}
 
 void CMainFrame::CreateMyToolbar() {
   m_toolbar=CreateToolBar(wxNO_BORDER | wxTB_HORIZONTAL, TOOLBAR_TOOLS);
@@ -74,10 +97,12 @@ void CMainFrame::OnQuit(wxCommandEvent& event) {
 void CMainFrame::OnSize(wxCommandEvent& event) {
   EpaisseurDialog vdlg(this, -1, wxT("Epaisseur"));
   vdlg.ShowModal();
+  this->setEpaisseur(vdlg.getEpaisseur());
 }
 void CMainFrame::OnColor(wxCommandEvent& event) {
   ColorDialog vdlg(this, -1, wxT("Couleur"));
   vdlg.ShowModal();
+  this->setCouleur(vdlg.getColor());
 }
 void CMainFrame::OnTriangle(wxCommandEvent& event) {
   TriangleDialog vdlg(this, -1, wxT("Triangle"));
@@ -105,5 +130,5 @@ void CMainFrame::OnTools(wxCommandEvent& event) {
 
 }
 void CMainFrame::OnDraw(wxCommandEvent& event) {
-
+  is_drawing = !is_drawing;
 }
