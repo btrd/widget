@@ -50,7 +50,7 @@ class TriangleDialog: public wxDialog
 class PropDialog: public wxDialog
 {
   public :
-    PropDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId);
   
   private :
     DECLARE_EVENT_TABLE();

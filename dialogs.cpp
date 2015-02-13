@@ -126,14 +126,15 @@ wxListBox* TriangleDialog::getListBox()
 }
 
 void TriangleDialog::OnProp(wxCommandEvent& event) {
-  PropDialog vdlg(this, -1, wxT("Propriétés"));
+  wxListBox* lb = this->getListBox();
+  PropDialog vdlg(this, -1, wxT("Propriétés"), lb->GetStringSelection());
   vdlg.ShowModal();
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
 END_EVENT_TABLE ()
 
-PropDialog::PropDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
+PropDialog::PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId) :
 wxDialog( parent, id, title)
 {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
@@ -142,7 +143,7 @@ wxDialog( parent, id, title)
 
   wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("Identifiant du triangle"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL);
+  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, textId);
 
   wxStaticText *item5 = new wxStaticText(this, EPAISSEUR_PROP_TEXT, wxT("Epaisseur du trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
