@@ -1,16 +1,12 @@
 #ifndef __TRIANGLE_H__
 #define __TRIANGLE_H__
 
-typedef struct 
-{
+typedef struct {
 	float x;	
 	float y;	
 } point;
 
-
-// Define a new triangle class
-class Triangle
-{
+class Triangle {
   public:
   	point p1;
   	point p2;
@@ -21,4 +17,4 @@ class Triangle
   	float thickness;
 };
 
-#endif // #ifndef __TRIANGLE_H__
+#endif

@@ -10,8 +10,7 @@ BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
 END_EVENT_TABLE ()
 
 VersionDialog::VersionDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
-wxDialog( parent, id, title)
-{
+wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
   wxStaticText *item1 = new wxStaticText(this, VERSION_TEXT, wxT("Version 1.0"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
@@ -31,8 +30,7 @@ BEGIN_EVENT_TABLE(EpaisseurDialog, wxDialog)
 END_EVENT_TABLE ()
 
 EpaisseurDialog::EpaisseurDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
-wxDialog( parent, id, title)
-{
+wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
   wxStaticText *item1 = new wxStaticText(this, EPAISSEUR_TEXT, wxT("Choisir l'épaisseur de trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
@@ -58,8 +56,7 @@ BEGIN_EVENT_TABLE(ColorDialog, wxDialog)
 END_EVENT_TABLE ()
 
 ColorDialog::ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
-wxDialog( parent, id, title)
-{
+wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
   wxStaticText *item1 = new wxStaticText(this, COLOR_TEXT, wxT("Choisir la couleur"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
@@ -89,16 +86,14 @@ BEGIN_EVENT_TABLE(TriangleDialog, wxDialog)
 END_EVENT_TABLE ()
 
 TriangleDialog::TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
-wxDialog( parent, id, title)
-{
+wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxHORIZONTAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item2 = new wxBoxSizer( wxVERTICAL );
 
   wxStaticText *item3 = new wxStaticText(this, COLOR_TEXT, wxT("Liste des triangles"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxString strs8[] = { wxT("Triangle 0"), wxT("Triangle 1"), wxT("Triangle 2") };
-  listBox = new wxListBox(this, TRIANGLE_LIST, wxDefaultPosition, wxDefaultSize, 3, strs8);
+  listBox = new wxListBox(this, TRIANGLE_LIST, wxDefaultPosition, wxDefaultSize);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( listBox, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -120,8 +115,7 @@ wxDialog( parent, id, title)
   item0->SetSizeHints( this );
 }
 
-wxListBox* TriangleDialog::getListBox()
-{
+wxListBox* TriangleDialog::getListBox() {
   return this->listBox;
 }
 
@@ -135,8 +129,7 @@ BEGIN_EVENT_TABLE(PropDialog, wxDialog)
 END_EVENT_TABLE ()
 
 PropDialog::PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId) :
-wxDialog( parent, id, title)
-{
+wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item2 = new wxBoxSizer( wxHORIZONTAL );
@@ -171,6 +164,5 @@ wxDialog( parent, id, title)
   item0->SetSizeHints( this );
 }
 
-FileDialog::FileDialog(wxWindow* parent, const wxString& message, const wxString& defaultDir, const wxString& defaultFile, const wxString& wildcard, long style) : wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style)
-{
+FileDialog::FileDialog(wxWindow* parent, const wxString& message, const wxString& defaultDir, const wxString& defaultFile, const wxString& wildcard, long style) : wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style) {
 }

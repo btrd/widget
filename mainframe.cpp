@@ -22,8 +22,7 @@ BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
 END_EVENT_TABLE()
 
 CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
-: wxFrame((wxFrame *)NULL, -1, title, pos, size) 
-{
+: wxFrame((wxFrame *)NULL, -1, title, pos, size) {
   epaisseurtraitcourante = 5;
   couleurcourante = new wxColour(wxT("red"));
   is_drawing = FALSE;
@@ -89,9 +88,32 @@ void CMainFrame::OnNew(wxCommandEvent& event) {
   vdlg.ShowModal();
 }
 void CMainFrame::OnOpen(wxCommandEvent& event) {
-  FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxOPEN);
+  FileDialog vdlg(this, wxT("Choose a file"), wxT(""), wxT("trian"), wxT("*.tri"), wxOPEN);
   vdlg.ShowModal();
   std::ifstream fo(vdlg.GetPath().fn_str(), std::ios::in);
+  if (!fo) {
+    wxString errormsg, caption;
+    errormsg.Printf(wxT("Unable to open file "));
+    errormsg.Append(vdlg.GetPath());
+    caption.Printf(wxT("Erreur"));
+    wxMessageDialog msg(this, errormsg, caption, wxOK | wxCENTRE | wxICON_ERROR);
+    msg.ShowModal();
+    return ;
+  }
+  fo >> num_tri;
+
+  for (int i = 0; i < num_tri; ++i) {
+    Triangle tri;
+
+    fo >> tri.p1.x >> tri.p1.y >> tri.p2.x >> tri.p2.y >> tri.p3.x >> tri.p3.y;
+    int r, g, b;
+    fo >> r >> g >> b;
+    tri.colour = wxColour(r, g, b);
+
+    fo >> tri.thickness;
+
+    tab_tri[i] = tri;
+  }
 }
 void CMainFrame::OnSave(wxCommandEvent& event) {
   FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxSAVE|wxFD_OVERWRITE_PROMPT );
@@ -111,14 +133,26 @@ void CMainFrame::OnColor(wxCommandEvent& event) {
   this->setCouleur(vdlg.getColor());
 }
 void CMainFrame::OnTriangle(wxCommandEvent& event) {
+  std::cout << num_tri << std::endl;
   TriangleDialog vdlg(this, -1, wxT("Triangle"));
 
   wxListBox * lb = vdlg.getListBox();
   lb->Clear();
-  lb->Append(wxT("Triangle 1"));
-  lb->Append(wxT("Triangle 2"));
-  lb->SetSelection(1);
-
+  if (num_tri > 0) {
+    lb->Append(wxT("Triangle 1"));
+  }
+  if (num_tri > 1) {
+    lb->Append(wxT("Triangle 2"));
+  }
+  if (num_tri > 2) {
+    lb->Append(wxT("Triangle 3"));
+  }
+  if (num_tri > 3) {
+    lb->Append(wxT("Triangle 4"));
+  }
+  if (num_tri > 4) {
+    lb->Append(wxT("Triangle 5"));
+  }
   vdlg.ShowModal();
 }
 void CMainFrame::OnVersion(wxCommandEvent& event) {

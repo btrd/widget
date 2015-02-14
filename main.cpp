@@ -1,21 +1,17 @@
-
 #include "wx/wx.h" 
 #include "mainframe.h"
 #include "dialogs.h"
+#include <iostream>
 
-class MyApp: public wxApp 
-{
+class MyApp: public wxApp {
 	virtual bool OnInit();
 	CMainFrame *m_MainFrame;
 };
 
 IMPLEMENT_APP(MyApp)
 
-
-bool MyApp::OnInit() 
-{
-	m_MainFrame = new CMainFrame( wxString("Fenêtre", wxConvUTF8), wxPoint(50,50), wxSize(450,340) );
-
+bool MyApp::OnInit() {
+	m_MainFrame = new CMainFrame(wxString("Fenêtre", wxConvUTF8), wxPoint(50,50), wxSize(450,340));
 
 	m_MainFrame->Show(TRUE);
 
