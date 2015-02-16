@@ -18,6 +18,7 @@ class CMainFrame: public wxFrame {
     wxColour* getCouleur();
     void setCouleur(wxColour* c);
     bool getDrawing();
+    Triangle tab_tri [5];
 
   private:
 
@@ -26,7 +27,6 @@ class CMainFrame: public wxFrame {
     wxColour *couleurcourante;
     bool is_drawing;
     int num_tri;
-    Triangle tab_tri [5];
 
   	DECLARE_EVENT_TABLE();
 
@@ -39,7 +39,6 @@ class CMainFrame: public wxFrame {
     void OnTriangle(wxCommandEvent& event);
     void OnVersion(wxCommandEvent& event);
     void OnToolbar(wxCommandEvent& event);
-    void OnTools(wxCommandEvent& event);
     void OnDraw(wxCommandEvent& event);
     void OnColor1(wxCommandEvent& event);
 };

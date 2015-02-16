@@ -1,6 +1,8 @@
-
 #ifndef __DIALOGS_H__
 #define __DIALOGS_H__
+
+#include "triangle.h"
+#include "mainframe.h"
 
 enum { VERSION_TEXT=10000, EPAISSEUR_TEXT, EPAISSEUR_SLIDER, COLOR_TEXT, COLOR_RADIO, TRIANGLE_LIST, BUTTON_PROP, BUTTON_DELETE, ID_PROP_TEXT, EPAISSEUR_PROP_TEXT, PROP_CTRL, PROP_SPIN};
 
@@ -34,18 +36,19 @@ class ColorDialog: public wxDialog {
 
 class TriangleDialog: public wxDialog {
   public:
-    TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    TriangleDialog(CMainFrame *parent, wxWindowID id, const wxString &title);
     wxListBox * getListBox();
 
   private:
     DECLARE_EVENT_TABLE();
     wxListBox *listBox;
+    Triangle tab_tri [5];
     void OnProp(wxCommandEvent& event);
 };
 
 class PropDialog: public wxDialog {
   public:
-    PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId);
+    PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, int id_tri, Triangle tri);
   
   private:
     DECLARE_EVENT_TABLE();

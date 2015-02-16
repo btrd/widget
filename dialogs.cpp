@@ -3,8 +3,10 @@
 #include <wx/wx.h>
 #include <wx/accel.h>
 #include <wx/spinctrl.h>
+#include <iterator>
 
 #include "dialogs.h"
+#include "triangle.h"
 
 BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
 END_EVENT_TABLE ()
@@ -85,8 +87,10 @@ BEGIN_EVENT_TABLE(TriangleDialog, wxDialog)
   EVT_BUTTON(BUTTON_PROP, TriangleDialog::OnProp)
 END_EVENT_TABLE ()
 
-TriangleDialog::TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
+TriangleDialog::TriangleDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
 wxDialog( parent, id, title) {
+  std::copy(parent->tab_tri, parent->tab_tri+5, tab_tri);
+
   wxBoxSizer *item0 = new wxBoxSizer( wxHORIZONTAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item2 = new wxBoxSizer( wxVERTICAL );
@@ -121,14 +125,14 @@ wxListBox* TriangleDialog::getListBox() {
 
 void TriangleDialog::OnProp(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
-  PropDialog vdlg(this, -1, wxT("Propriétés"), lb->GetStringSelection());
+  PropDialog vdlg(this, -1, wxT("Propriétés"), lb->GetSelection(), tab_tri[lb->GetSelection()]);
   vdlg.ShowModal();
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
 END_EVENT_TABLE ()
 
-PropDialog::PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxString &textId) :
+PropDialog::PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, int id_tri, Triangle tri) :
 wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
@@ -136,11 +140,11 @@ wxDialog( parent, id, title) {
 
   wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("Identifiant du triangle"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, textId);
+  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, wxT("test"));
 
   wxStaticText *item5 = new wxStaticText(this, EPAISSEUR_PROP_TEXT, wxT("Epaisseur du trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxSpinCtrl *item6 = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, 1);
+  wxSpinCtrl *item6 = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, tri.thickness);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item4, 0, wxALIGN_CENTRE|wxALL, 5 );

@@ -18,7 +18,6 @@ BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
   EVT_MENU(MENU_TRIANGLE, CMainFrame::OnTriangle)
   EVT_MENU(MENU_VERSION, CMainFrame::OnVersion)
   EVT_MENU(MENU_TOOLBAR, CMainFrame::OnToolbar)
-  EVT_MENU(TOOLBAR_TOOLS, CMainFrame::OnTools)
   EVT_MENU(MENU_DRAW, CMainFrame::OnDraw)
 END_EVENT_TABLE()
 
@@ -85,7 +84,9 @@ bool CMainFrame::GetVisibility() {
 }
 
 void CMainFrame::OnNew(wxCommandEvent& event) {
-
+  num_tri = 0;
+  wxMenuBar* menu_bar = this->GetMenuBar();
+  menu_bar->Enable(MENU_TRIANGLE,false);
 }
 void CMainFrame::OnOpen(wxCommandEvent& event) {
   FileDialog vdlg(this, wxT("Choose a file"), wxT(""), wxT("trian"), wxT("*.tri"), wxOPEN);
@@ -113,6 +114,10 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
     fo >> tri.thickness;
 
     tab_tri[i] = tri;
+  }
+  if (num_tri > 0) {
+    wxMenuBar* menu_bar = this->GetMenuBar();
+    menu_bar->Enable(MENU_TRIANGLE,true);
   }
 }
 void CMainFrame::OnSave(wxCommandEvent& event) {
@@ -177,9 +182,6 @@ void CMainFrame::OnToolbar(wxCommandEvent& event) {
   } else {
     ShowToolbar();
   }
-}
-void CMainFrame::OnTools(wxCommandEvent& event) {
-
 }
 void CMainFrame::OnDraw(wxCommandEvent& event) {
   is_drawing = !is_drawing;

@@ -37,7 +37,7 @@ bool MyApp::OnInit() {
   opt_menu->Append(MENU_SIZE, wxT("Epaisseur trait"));
   opt_menu->Append(MENU_COLOR, wxT("Couleur"));
   opt_menu->Append(MENU_TRIANGLE, wxT("Gestion des triangles"));
-  //menu_bar->Enable(MENU_TRIANGLE,false);
+  menu_bar->Enable(MENU_TRIANGLE,false);
 
   help_menu->Append(MENU_VERSION, wxT("Version"));
  
