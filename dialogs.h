@@ -44,10 +44,13 @@ class TriangleDialog: public wxDialog {
     wxListBox *listBox;
     Triangle tab_tri [5];
     void OnProp(wxCommandEvent& event);
+    void OnDelete(wxCommandEvent& event);
 };
 
 class PropDialog: public wxDialog {
   public:
+    wxSpinCtrl *spin;
+    wxRadioBox *radio;
     PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, int id_tri, Triangle tri);
   
   private:

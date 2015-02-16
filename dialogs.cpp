@@ -98,6 +98,7 @@ wxDialog( parent, id, title) {
   wxStaticText *item3 = new wxStaticText(this, COLOR_TEXT, wxT("Liste des triangles"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
   listBox = new wxListBox(this, TRIANGLE_LIST, wxDefaultPosition, wxDefaultSize);
+  listBox->SetSelection(0);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( listBox, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -125,8 +126,15 @@ wxListBox* TriangleDialog::getListBox() {
 
 void TriangleDialog::OnProp(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
-  PropDialog vdlg(this, -1, wxT("Propriétés"), lb->GetSelection(), tab_tri[lb->GetSelection()]);
+  int select = 0;
+  select = lb->GetSelection();
+  PropDialog vdlg(this, -1, wxT("Propriétés"), select, tab_tri[select]);
   vdlg.ShowModal();
+  Triangle tri = tab_tri[select];
+  tri.thickness = vdlg.spin->GetValue();
+  wxString t = vdlg.radio->GetStringSelection();
+  tri.colour = wxColour(t);
+  tab_tri[select] = tri;
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
@@ -140,22 +148,36 @@ wxDialog( parent, id, title) {
 
   wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("Identifiant du triangle"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, wxT("test"));
+  wxString tri_string;
+  tri_string << id_tri+1;
+  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, wxT("Triangle " + tri_string));
+  item4->SetEditable(false);
 
   wxStaticText *item5 = new wxStaticText(this, EPAISSEUR_PROP_TEXT, wxT("Epaisseur du trait"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxSpinCtrl *item6 = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, tri.thickness);
+  spin = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, tri.thickness);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item4, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item5, 0, wxALIGN_CENTRE|wxALL, 5 );
-  item1->Add( item6, 0, wxALIGN_CENTRE|wxALL, 5 );
+  item1->Add( spin, 0, wxALIGN_CENTRE|wxALL, 5 );
 
   wxString strs8[] = { wxT("Red"), wxT("Green"), wxT("Blue") };
-  wxRadioBox *item7 = new wxRadioBox(this, COLOR_RADIO, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, strs8);
+
+  int select = 0;
+
+  if (tri.colour == wxColour(wxT("red")) )
+    select = 0;
+  else if (tri.colour == wxColour(wxT("green")) )
+    select = 1;
+  else if (tri.colour == wxColour(wxT("blue")) )
+    select = 2;
+
+  radio = new wxRadioBox(this, COLOR_RADIO, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, strs8);
+  radio->SetSelection(select);
 
   item2->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
-  item2->Add( item7, 0, wxALIGN_CENTRE|wxALL, 5 );
+  item2->Add( radio, 0, wxALIGN_CENTRE|wxALL, 5 );
 
   wxButton *item8 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 
