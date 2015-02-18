@@ -85,6 +85,7 @@ wxColour* ColorDialog::getColor() {
 
 BEGIN_EVENT_TABLE(TriangleDialog, wxDialog)
   EVT_BUTTON(BUTTON_PROP, TriangleDialog::OnProp)
+  EVT_BUTTON(BUTTON_DELETE, TriangleDialog::OnDelete)
 END_EVENT_TABLE ()
 
 TriangleDialog::TriangleDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
@@ -125,6 +126,19 @@ wxListBox* TriangleDialog::getListBox() {
 }
 
 void TriangleDialog::OnProp(wxCommandEvent& event) {
+  wxListBox* lb = this->getListBox();
+  int select = 0;
+  select = lb->GetSelection();
+  PropDialog vdlg(this, -1, wxT("Propriétés"), select, tab_tri[select]);
+  vdlg.ShowModal();
+  Triangle tri = tab_tri[select];
+  tri.thickness = vdlg.spin->GetValue();
+  wxString t = vdlg.radio->GetStringSelection();
+  tri.colour = wxColour(t);
+  tab_tri[select] = tri;
+}
+
+void TriangleDialog::OnDelete(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
   int select = 0;
   select = lb->GetSelection();

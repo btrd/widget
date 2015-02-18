@@ -94,7 +94,7 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
   std::ifstream fo(vdlg.GetPath().fn_str(), std::ios::in);
   if (!fo) {
     wxString errormsg, caption;
-    errormsg.Printf(wxT("Unable to open file "));
+    errormsg.Printf(wxT("Unable to open file"));
     errormsg.Append(vdlg.GetPath());
     caption.Printf(wxT("Erreur"));
     wxMessageDialog msg(this, errormsg, caption, wxOK | wxCENTRE | wxICON_ERROR);
