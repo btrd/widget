@@ -23,30 +23,30 @@ END_EVENT_TABLE()
 
 CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame((wxFrame *)NULL, -1, title, pos, size) {
-  epaisseurtraitcourante = 5;
-  couleurcourante = new wxColour(wxT("red"));
+  currentThickness = 5;
+  currentColor = new wxColour(wxT("red"));
   is_drawing = FALSE;
   num_tri = 0;
 }
 
-int CMainFrame::getEpaisseur() {
-  return epaisseurtraitcourante;
+int CMainFrame::getThickness() {
+  return currentThickness;
 }
 
-void CMainFrame::setEpaisseur(int e) {
-  epaisseurtraitcourante = e;
+void CMainFrame::setThickness(int e) {
+  currentThickness = e;
 }
 
 wxColour* CMainFrame::getCouleur() {
-  return couleurcourante;
+  return currentColor;
 }
 
 void CMainFrame::setCouleur(wxColour* c) {
-  couleurcourante = c;
+  currentColor = c;
 }
 
 bool CMainFrame::getDrawing() {
-  return epaisseurtraitcourante;
+  return currentThickness;
 }
 
 void CMainFrame::CreateMyToolbar() {
@@ -60,13 +60,13 @@ void CMainFrame::CreateMyToolbar() {
 
   m_toolbar->SetToolBitmapSize(wxSize(toolBarBitmaps[0].GetWidth(), toolBarBitmaps[0].GetHeight()));
 
-  m_toolbar->AddTool(MENU_NEW, wxT("Nouveau"), toolBarBitmaps[0]);
-  m_toolbar->AddTool(MENU_OPEN, wxT("Ouvrir"), toolBarBitmaps[1]);
-  m_toolbar->AddTool(MENU_SAVE, wxT("Sauvegarder"), toolBarBitmaps[2]);
+  m_toolbar->AddTool(MENU_NEW, wxT("New"), toolBarBitmaps[0]);
+  m_toolbar->AddTool(MENU_OPEN, wxT("Open"), toolBarBitmaps[1]);
+  m_toolbar->AddTool(MENU_SAVE, wxT("Save"), toolBarBitmaps[2]);
 
   m_toolbar->AddSeparator();
 
-  m_toolbar->AddCheckTool(MENU_DRAW, wxT("Dessiner"), toolBarBitmaps[3]);
+  m_toolbar->AddCheckTool(MENU_DRAW, wxT("Draw"), toolBarBitmaps[3]);
 
   m_toolbar->Realize();
   SetToolBar(m_toolbar);
@@ -149,9 +149,9 @@ void CMainFrame::OnQuit(wxCommandEvent& event) {
   Close(TRUE);
 }
 void CMainFrame::OnSize(wxCommandEvent& event) {
-  EpaisseurDialog vdlg(this, -1, wxT("Epaisseur"));
+  ThicknessDialog vdlg(this, -1, wxT("Thickness"));
   vdlg.ShowModal();
-  this->setEpaisseur(vdlg.getEpaisseur());
+  this->setThickness(vdlg.getThickness());
 }
 void CMainFrame::OnColor(wxCommandEvent& event) {
   ColorDialog vdlg(this, -1, wxT("Couleur"));

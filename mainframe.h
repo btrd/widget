@@ -13,8 +13,8 @@ class CMainFrame: public wxFrame {
     void ShowToolbar();
     void HideToolbar();
     bool GetVisibility();
-    int getEpaisseur();
-    void setEpaisseur(int e);
+    int getThickness();
+    void setThickness(int e);
     wxColour* getCouleur();
     void setCouleur(wxColour* c);
     bool getDrawing();
@@ -23,8 +23,8 @@ class CMainFrame: public wxFrame {
   private:
 
     wxToolBar *m_toolbar;
-    int epaisseurtraitcourante;
-    wxColour *couleurcourante;
+    int currentThickness;
+    wxColour *currentColor;
     bool is_drawing;
     int num_tri;
 

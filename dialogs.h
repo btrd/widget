@@ -1,10 +1,11 @@
 #ifndef __DIALOGS_H__
 #define __DIALOGS_H__
 
+#include <wx/spinctrl.h>
 #include "triangle.h"
 #include "mainframe.h"
 
-enum { VERSION_TEXT=10000, EPAISSEUR_TEXT, EPAISSEUR_SLIDER, COLOR_TEXT, COLOR_RADIO, TRIANGLE_LIST, BUTTON_PROP, BUTTON_DELETE, ID_PROP_TEXT, EPAISSEUR_PROP_TEXT, PROP_CTRL, PROP_SPIN};
+enum { VERSION_TEXT=10000, THICKNESS_TEXT, THICKNESS_SLIDER, COLOR_TEXT, COLOR_RADIO, TRIANGLE_LIST, BUTTON_PROP, BUTTON_DELETE, ID_PROP_TEXT, THICKNESS_PROP_TEXT, PROP_CTRL, PROP_SPIN};
 
 class VersionDialog: public wxDialog {
   public:
@@ -14,14 +15,14 @@ class VersionDialog: public wxDialog {
     DECLARE_EVENT_TABLE();
 };
 
-class EpaisseurDialog: public wxDialog {
+class ThicknessDialog: public wxDialog {
   public:
-    EpaisseurDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-    int getEpaisseur();
+    ThicknessDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    int getThickness();
 
   private:
     DECLARE_EVENT_TABLE();
-    wxSlider *epaisseurSlider;
+    wxSlider *thicknessSlider;
 };
 
 class ColorDialog: public wxDialog {
