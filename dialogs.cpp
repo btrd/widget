@@ -90,7 +90,8 @@ END_EVENT_TABLE ()
 
 TriangleDialog::TriangleDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
 wxDialog( parent, id, title) {
-  std::copy(parent->tab_tri, parent->tab_tri+5, tab_tri);
+  p = parent;
+  //std::copy(parent->tab_tri, parent->tab_tri+5, tab_tri);
 
   wxBoxSizer *item0 = new wxBoxSizer( wxHORIZONTAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
@@ -129,26 +130,17 @@ void TriangleDialog::OnProp(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
   int select = 0;
   select = lb->GetSelection();
-  PropDialog vdlg(this, -1, wxT("Properties"), select, tab_tri[select]);
+  PropDialog vdlg(this, -1, wxT("Properties"), select, p->tab_tri[select]);
   vdlg.ShowModal();
-  Triangle tri = tab_tri[select];
+  Triangle tri = p->tab_tri[select];
   tri.thickness = vdlg.spin->GetValue();
   wxString t = vdlg.radio->GetStringSelection();
   tri.colour = wxColour(t);
-  tab_tri[select] = tri;
+  p->tab_tri[select] = tri;
 }
 
 void TriangleDialog::OnDelete(wxCommandEvent& event) {
-  wxListBox* lb = this->getListBox();
-  int select = 0;
-  select = lb->GetSelection();
-  PropDialog vdlg(this, -1, wxT("Properties"), select, tab_tri[select]);
-  vdlg.ShowModal();
-  Triangle tri = tab_tri[select];
-  tri.thickness = vdlg.spin->GetValue();
-  wxString t = vdlg.radio->GetStringSelection();
-  tri.colour = wxColour(t);
-  tab_tri[select] = tri;
+  
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)

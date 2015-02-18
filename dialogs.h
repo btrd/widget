@@ -41,6 +41,7 @@ class TriangleDialog: public wxDialog {
     wxListBox * getListBox();
 
   private:
+    CMainFrame *p;
     DECLARE_EVENT_TABLE();
     wxListBox *listBox;
     Triangle tab_tri [5];
