@@ -106,6 +106,9 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
   for (int i = 0; i < num_tri; ++i) {
     Triangle tri;
 
+    std::string tmp;
+    fo >> tmp;
+    tri.name = wxString::FromUTF8(tmp.c_str());
     fo >> tri.p1.x >> tri.p1.y >> tri.p2.x >> tri.p2.y >> tri.p3.x >> tri.p3.y;
     int r, g, b;
     fo >> r >> g >> b;
@@ -139,6 +142,7 @@ void CMainFrame::OnSave(wxCommandEvent& event) {
   for (int i = 0; i < num_tri; ++i) {
     Triangle tri = tab_tri[i];
 
+    fs << tri.name.mb_str() << std::endl;
     fs << tri.p1.x << " " << tri.p1.y << " " << tri.p2.x << " " << tri.p2.y << " " << tri.p3.x << " " << tri.p3.y << std::endl;
     fs << (int)tri.colour.Red() << " " << (int)tri.colour.Green() << " " << (int)tri.colour.Blue() << std::endl;
     fs << tri.thickness << std::endl << std::endl;
@@ -168,7 +172,7 @@ void CMainFrame::OnTriangle(wxCommandEvent& event) {
   for (int i = 0; i < num_tri; ++i) {
     wxString chi;
     chi << i+1;
-    lb->Append(wxT("Triangle " + chi));
+    lb->Append(tab_tri[i].name);
   }
   vdlg.ShowModal();
 }

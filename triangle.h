@@ -8,6 +8,7 @@ typedef struct {
 
 class Triangle {
   public:
+    wxString name;
   	point p1;
   	point p2;
   	point p3;

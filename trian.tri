@@ -1,21 +1,21 @@
 4
 
-Triangle 1
+Triangle1
 0 0 100 200 100 0
 255 0 0
 2
 
-Triangle 2
+TriangleTest
 -100 0 -200 150 -100 150
 0 128 0
 4
 
-Triangle 3
+Triangle3
 -50 10 -50 150 0 100
 0 0 255
 3
 
-Triangle 4
+Triangle4
 -184 -37 -13 166 106 -85
 255 0 0
 1
