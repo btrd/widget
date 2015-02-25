@@ -133,14 +133,20 @@ void TriangleDialog::OnProp(wxCommandEvent& event) {
   PropDialog vdlg(this, -1, wxT("Properties"), select, p->tab_tri[select]);
   vdlg.ShowModal();
   Triangle tri = p->tab_tri[select];
+  tri.name = vdlg.text->GetValue();
   tri.thickness = vdlg.spin->GetValue();
   wxString t = vdlg.radio->GetStringSelection();
   tri.colour = wxColour(t);
   p->tab_tri[select] = tri;
+  lb->SetString(select, tri.name);
 }
 
 void TriangleDialog::OnDelete(wxCommandEvent& event) {
-  
+  wxListBox* lb = this->getListBox();
+  int select = 0;
+  select = lb->GetSelection();
+  lb->Delete(select);
+  p->DeleteTriangle(select);
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
@@ -154,17 +160,14 @@ wxDialog( parent, id, title) {
 
   wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("ID triangle"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxString tri_string;
-  tri_string << id_tri+1;
-  wxTextCtrl *item4 = new wxTextCtrl(this, PROP_CTRL, wxT("Triangle " + tri_string));
-  item4->SetEditable(false);
+  text = new wxTextCtrl(this, PROP_CTRL, tri.name);
 
   wxStaticText *item5 = new wxStaticText(this, THICKNESS_PROP_TEXT, wxT("Thickness"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
   spin = new wxSpinCtrl(this, PROP_SPIN, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10, tri.thickness);
 
   item1->Add( item3, 0, wxALIGN_CENTRE|wxALL, 5 );
-  item1->Add( item4, 0, wxALIGN_CENTRE|wxALL, 5 );
+  item1->Add( text, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( item5, 0, wxALIGN_CENTRE|wxALL, 5 );
   item1->Add( spin, 0, wxALIGN_CENTRE|wxALL, 5 );
 

@@ -190,3 +190,8 @@ void CMainFrame::OnToolbar(wxCommandEvent& event) {
 void CMainFrame::OnDraw(wxCommandEvent& event) {
   is_drawing = !is_drawing;
 }
+
+void CMainFrame::DeleteTriangle(int i) {
+  std::copy(tab_tri + i + 1, tab_tri + num_tri, tab_tri + i);
+  num_tri--;
+}

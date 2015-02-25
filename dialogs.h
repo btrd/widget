@@ -53,6 +53,7 @@ class PropDialog: public wxDialog {
   public:
     wxSpinCtrl *spin;
     wxRadioBox *radio;
+    wxTextCtrl *text;
     PropDialog(wxWindow *parent, wxWindowID id, const wxString &title, int id_tri, Triangle tri);
   
   private:

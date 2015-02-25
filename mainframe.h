@@ -18,6 +18,8 @@ class CMainFrame: public wxFrame {
     wxColour* getCouleur();
     void setCouleur(wxColour* c);
     bool getDrawing();
+    void DeleteTriangle(int i);
+
     Triangle tab_tri [5];
 
   private:
