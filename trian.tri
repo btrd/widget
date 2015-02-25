@@ -5,9 +5,9 @@ Triangle1
 255 0 0
 2
 
-TriangleTest
+Triangle2
 -100 0 -200 150 -100 150
-0 128 0
+0 255 0
 4
 
 Triangle3

@@ -89,7 +89,7 @@ void CMainFrame::OnNew(wxCommandEvent& event) {
   menu_bar->Enable(MENU_TRIANGLE,false);
 }
 void CMainFrame::OnOpen(wxCommandEvent& event) {
-  FileDialog vdlg(this, wxT("Choose a file"), wxT(""), wxT("trian"), wxT("*.tri"), wxOPEN);
+  FileDialog vdlg(this, wxT("Select a file"), wxT(""), wxT("trian.tri"), wxT("*.tri"), wxOPEN);
   vdlg.ShowModal();
   std::ifstream fo(vdlg.GetPath().fn_str(), std::ios::in);
   if (!fo) {
@@ -124,7 +124,7 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
   }
 }
 void CMainFrame::OnSave(wxCommandEvent& event) {
-  FileDialog vdlg(this, wxT("Choose a file"), wxT("˜"), wxT("trian"), wxT("*.tri"), wxSAVE|wxFD_OVERWRITE_PROMPT );
+  FileDialog vdlg(this, wxT("Save file"), wxT("˜"), wxT("trian.tri"), wxT("*.tri"), wxSAVE|wxFD_OVERWRITE_PROMPT );
   vdlg.ShowModal();
   std::ofstream fs(vdlg.GetPath().fn_str(), std::ios::out);
 

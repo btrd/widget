@@ -128,25 +128,27 @@ wxListBox* TriangleDialog::getListBox() {
 
 void TriangleDialog::OnProp(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
-  int select = 0;
-  select = lb->GetSelection();
-  PropDialog vdlg(this, -1, wxT("Properties"), select, p->tab_tri[select]);
-  vdlg.ShowModal();
-  Triangle tri = p->tab_tri[select];
-  tri.name = vdlg.text->GetValue();
-  tri.thickness = vdlg.spin->GetValue();
-  wxString t = vdlg.radio->GetStringSelection();
-  tri.colour = wxColour(t);
-  p->tab_tri[select] = tri;
-  lb->SetString(select, tri.name);
+  int select = lb->GetSelection();
+  if(select >= 0) {
+    PropDialog vdlg(this, -1, wxT("Properties"), select, p->tab_tri[select]);
+    vdlg.ShowModal();
+    Triangle tri = p->tab_tri[select];
+    tri.name = vdlg.text->GetValue();
+    tri.thickness = vdlg.spin->GetValue();
+    wxString t = vdlg.radio->GetStringSelection();
+    tri.colour = wxColour(t);
+    p->tab_tri[select] = tri;
+    lb->SetString(select, tri.name);
+  }
 }
 
 void TriangleDialog::OnDelete(wxCommandEvent& event) {
   wxListBox* lb = this->getListBox();
-  int select = 0;
-  select = lb->GetSelection();
-  lb->Delete(select);
-  p->DeleteTriangle(select);
+  int select = lb->GetSelection();
+  if(select >= 0) {
+    lb->Delete(select);
+    p->DeleteTriangle(select);
+  }
 }
 
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
