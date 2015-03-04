@@ -13,6 +13,7 @@ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
 EVT_PAINT(OpenGLCanvas::OnPaint)
 EVT_SIZE(OpenGLCanvas::OnSize)
 EVT_ERASE_BACKGROUND(OpenGLCanvas::OnEraseBackground)
+
 EVT_MOTION(OpenGLCanvas::OnMouseMove)
 EVT_LEFT_DOWN(OpenGLCanvas::OnLeftDown)
 EVT_LEFT_UP(OpenGLCanvas::OnLeftUp)

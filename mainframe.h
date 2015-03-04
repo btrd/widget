@@ -5,7 +5,7 @@
 #include "triangle.h"
 #include "openglcanvas.h"
 
-enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_SIZE, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS };
+enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_THICKNESS, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS };
 
 class OpenGLCanvas;
 
@@ -25,13 +25,13 @@ class CMainFrame: public wxFrame {
 
     Triangle tab_tri [5];
     int num_tri;
+    int currentThickness;
+    bool is_drawing;
+    OpenGLCanvas *canvas;
+    wxColour *currentColor;
 
   private:
-    OpenGLCanvas *canvas;
     wxToolBar *m_toolbar;
-    int currentThickness;
-    wxColour *currentColor;
-    bool is_drawing;
 
   	DECLARE_EVENT_TABLE();
 

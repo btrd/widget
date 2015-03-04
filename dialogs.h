@@ -17,7 +17,7 @@ class VersionDialog: public wxDialog {
 
 class ThicknessDialog: public wxDialog {
   public:
-    ThicknessDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    ThicknessDialog(CMainFrame *parent, wxWindowID id, const wxString &title);
     int getThickness();
 
   private:
@@ -27,7 +27,7 @@ class ThicknessDialog: public wxDialog {
 
 class ColorDialog: public wxDialog {
   public:
-    ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    ColorDialog(CMainFrame *parent, wxWindowID id, const wxString &title);
     wxColour* getColor();
     
   private:
@@ -44,7 +44,6 @@ class TriangleDialog: public wxDialog {
     CMainFrame *p;
     DECLARE_EVENT_TABLE();
     wxListBox *listBox;
-    Triangle tab_tri [5];
     void OnProp(wxCommandEvent& event);
     void OnDelete(wxCommandEvent& event);
 };

@@ -31,13 +31,13 @@ wxDialog( parent, id, title) {
 BEGIN_EVENT_TABLE(ThicknessDialog, wxDialog)
 END_EVENT_TABLE ()
 
-ThicknessDialog::ThicknessDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
+ThicknessDialog::ThicknessDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
 wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
   wxStaticText *item1 = new wxStaticText(this, THICKNESS_TEXT, wxT("Select thickness"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
-
-  thicknessSlider = new wxSlider(this, THICKNESS_SLIDER, 1, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
+  
+  thicknessSlider = new wxSlider(this, THICKNESS_SLIDER, parent->currentThickness, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
 
   wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 
@@ -57,7 +57,7 @@ int ThicknessDialog::getThickness() {
 BEGIN_EVENT_TABLE(ColorDialog, wxDialog)
 END_EVENT_TABLE ()
 
-ColorDialog::ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title) :
+ColorDialog::ColorDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
 wxDialog( parent, id, title) {
   wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
@@ -65,6 +65,17 @@ wxDialog( parent, id, title) {
 
   wxString strs8[] = { wxT("Red"), wxT("Green"), wxT("Blue") };
   colorRadio = new wxRadioBox(this, COLOR_RADIO, wxT("Color"), wxDefaultPosition, wxDefaultSize, 3, strs8);
+
+  int select = 0;
+
+  if (parent->currentColor->Red() == 255 )
+    select = 0;
+  else if (parent->currentColor->Green() == 128 )
+    select = 1;
+  else if (parent->currentColor->Blue() == 255 )
+    select = 2;
+
+  colorRadio->SetSelection(select);
 
   wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
 
@@ -138,6 +149,7 @@ void TriangleDialog::OnProp(wxCommandEvent& event) {
     tri.colour = wxColour(t);
     p->tab_tri[select] = tri;
     lb->SetString(select, tri.name);
+    p->canvas->Draw();
   }
 }
 
@@ -147,6 +159,7 @@ void TriangleDialog::OnDelete(wxCommandEvent& event) {
   if(select >= 0) {
     lb->Delete(select);
     p->DeleteTriangle(select);
+    p->canvas->Draw();
   }
 }
 

@@ -5,21 +5,27 @@
 #include <wx/glcanvas.h>
 #include "mainframe.h"
 
-//enum { EVT_PAINT, EVT_SIZE, EVT_ERASE_BACKGROUND };
 class CMainFrame;
+
+enum {POPUP_MANAGE, POPUP_FILE, POPUP_VALUE};
 
 class OpenGLCanvas: public wxGLCanvas {
   public:
     OpenGLCanvas(CMainFrame *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxString& name);
-    ~OpenGLCanvas(void);
+    void Draw();
   private:
     CMainFrame *p;
-    
+    int click;
+    Triangle tri;
+
     DECLARE_EVENT_TABLE();
-    void OnPaint( wxPaintEvent& event );
-    void OnSize( wxSizeEvent& event );
-    void OnEraseBackground( wxEraseEvent& event );
-    void Draw();
+    void OnPaint(wxPaintEvent& event);
+    void OnSize(wxSizeEvent& event);
+    void OnEraseBackground(wxEraseEvent& event);
+    void OnMouseMove(wxMouseEvent& event);
+    void OnLeftUp(wxMouseEvent& event);
+    void OnLeftDown(wxMouseEvent& event);
+    void OnRightDown(wxMouseEvent& event);
 };
 
 #endif

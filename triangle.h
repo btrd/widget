@@ -16,6 +16,7 @@ class Triangle {
   	wxColour colour;
 
   	float thickness;
+    bool IsPointInTriangle(int x, int y);
 };
 
 #endif

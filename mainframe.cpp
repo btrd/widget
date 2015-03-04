@@ -12,7 +12,7 @@ BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
   EVT_MENU(MENU_OPEN, CMainFrame::OnOpen)
   EVT_MENU(MENU_SAVE, CMainFrame::OnSave)
   EVT_MENU(MENU_QUIT, CMainFrame::OnQuit)
-  EVT_MENU(MENU_SIZE, CMainFrame::OnSize)
+  EVT_MENU(MENU_THICKNESS, CMainFrame::OnSize)
   EVT_MENU(MENU_COLOR, CMainFrame::OnColor)
   EVT_MENU(MENU_TRIANGLE, CMainFrame::OnTriangle)
   EVT_MENU(MENU_VERSION, CMainFrame::OnVersion)
@@ -122,6 +122,7 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
     wxMenuBar* menu_bar = this->GetMenuBar();
     menu_bar->Enable(MENU_TRIANGLE,true);
   }
+  canvas->Draw();
 }
 void CMainFrame::OnSave(wxCommandEvent& event) {
   FileDialog vdlg(this, wxT("Save file"), wxT("˜"), wxT("trian.tri"), wxT("*.tri"), wxSAVE|wxFD_OVERWRITE_PROMPT );

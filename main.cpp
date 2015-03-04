@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "wx/wx.h" 
 #include "mainframe.h"
@@ -35,7 +34,7 @@ bool MyApp::OnInit() {
   file_menu->AppendSeparator();
   file_menu->Append(MENU_QUIT, wxT("Quit\tCtrl-Q"));
 
-  opt_menu->Append(MENU_SIZE, wxT("Thickness"));
+  opt_menu->Append(MENU_THICKNESS, wxT("Thickness"));
   opt_menu->Append(MENU_COLOR, wxT("Color"));
   opt_menu->Append(MENU_TRIANGLE, wxT("Management of triangles"));
   menu_bar->Enable(MENU_TRIANGLE,false);
