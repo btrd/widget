@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <wx/wx.h>
-#include <wx/accel.h>
+//#include <wx/accel.h>
 #include <fstream>
-#include <sstream>
-
+//#include <sstream>
 #include "mainframe.h"
 #include "dialogs.h"
 
@@ -27,6 +26,7 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
   currentColor = new wxColour(wxT("red"));
   is_drawing = FALSE;
   num_tri = 0;
+  canvas = new OpenGLCanvas(this, CANVAS, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas") );
 }
 
 int CMainFrame::getThickness() {
@@ -175,6 +175,10 @@ void CMainFrame::OnTriangle(wxCommandEvent& event) {
     lb->Append(tab_tri[i].name);
   }
   vdlg.ShowModal();
+  if (num_tri == 0) {
+    wxMenuBar* menu_bar = this->GetMenuBar();
+    menu_bar->Enable(MENU_TRIANGLE,false);
+  }
 }
 void CMainFrame::OnVersion(wxCommandEvent& event) {
   VersionDialog vdlg(this, -1, wxT("Version"));

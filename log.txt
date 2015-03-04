@@ -1,0 +1,118 @@
+g++ `wx-config --cxxflags` -c openglcanvas.cpp -o openglcanvas.o
+In file included from /usr/include/wx-2.8/wx/wx.h:25:0,
+                 from openglcanvas.cpp:1:
+/usr/include/wx-2.8/wx/event.h:2721:34: error: ISO C++ does not permit ‘wxGLCanvas::sm_eventTable’ to be defined as ‘OpenGLCanvas::sm_eventTable’ [-fpermissive]
+     const wxEventTable theClass::sm_eventTable = \
+                                  ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/event.h:2709:40: error: ‘const wxEventTableEntry wxGLCanvas::sm_eventTableEntries []’ is private
+         static const wxEventTableEntry sm_eventTableEntries[]; \
+                                        ^
+/usr/include/wx-2.8/wx/gtk/glcanvas.h:143:5: note: in expansion of macro ‘DECLARE_EVENT_TABLE’
+     DECLARE_EVENT_TABLE()
+     ^
+/usr/include/wx-2.8/wx/event.h:2722:49: error: within this context
+         { &baseClass::sm_eventTable, &theClass::sm_eventTableEntries[0] }; \
+                                                 ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/event.h:2723:51: error: no ‘const wxEventTable* OpenGLCanvas::GetEventTable() const’ member function declared in class ‘OpenGLCanvas’
+     const wxEventTable *theClass::GetEventTable() const \
+                                                   ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/event.h:2725:73: error: ISO C++ does not permit ‘wxGLCanvas::sm_eventHashTable’ to be defined as ‘OpenGLCanvas::sm_eventHashTable’ [-fpermissive]
+     wxEventHashTable theClass::sm_eventHashTable(theClass::sm_eventTable); \
+                                                                         ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/event.h:2726:53: error: no ‘wxEventHashTable& OpenGLCanvas::GetEventHashTable() const’ member function declared in class ‘OpenGLCanvas’
+     wxEventHashTable &theClass::GetEventHashTable() const \
+                                                     ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/event.h:2728:60: error: ISO C++ does not permit ‘wxGLCanvas::sm_eventTableEntries’ to be defined as ‘OpenGLCanvas::sm_eventTableEntries’ [-fpermissive]
+     const wxEventTableEntry theClass::sm_eventTableEntries[] = { \
+                                                            ^
+openglcanvas.cpp:4:1: note: in expansion of macro ‘BEGIN_EVENT_TABLE’
+ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
+ ^
+/usr/include/wx-2.8/wx/defs.h:313:50: error: invalid static_cast from type ‘void (OpenGLCanvas::*)(wxPaintEvent&)’ to type ‘wxCommandEventFunction {aka void (wxEvtHandler::*)(wxCommandEvent&)}’
+     #define wx_static_cast(t, x) static_cast<t>(x)
+                                                  ^
+/usr/include/wx-2.8/wx/event.h:96:44: note: in definition of macro ‘DECLARE_EVENT_TABLE_ENTRY’
+     wxEventTableEntry(type, winid, idLast, fn, obj)
+                                            ^
+/usr/include/wx-2.8/wx/event.h:2851:5: note: in expansion of macro ‘wx__DECLARE_EVT2’
+     wx__DECLARE_EVT2(evt, id, wxID_ANY, fn)
+     ^
+/usr/include/wx-2.8/wx/event.h:3026:31: note: in expansion of macro ‘wx__DECLARE_EVT1’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                               ^
+/usr/include/wx-2.8/wx/event.h:52:38: note: in expansion of macro ‘wx_static_cast’
+ #define wxStaticCastEvent(type, val) wx_static_cast(type, val)
+                                      ^
+/usr/include/wx-2.8/wx/event.h:2627:45: note: in expansion of macro ‘wxStaticCastEvent’
+     (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxCommandEventFunction, &func)
+                                             ^
+/usr/include/wx-2.8/wx/event.h:3026:84: note: in expansion of macro ‘wxCommandEventHandler’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                                                                                    ^
+openglcanvas.cpp:5:3: note: in expansion of macro ‘EVT_MENU’
+   EVT_MENU(EVT_PAINT, OpenGLCanvas::OnPaint)
+   ^
+/usr/include/wx-2.8/wx/defs.h:313:50: error: invalid static_cast from type ‘void (OpenGLCanvas::*)(wxSizeEvent&)’ to type ‘wxCommandEventFunction {aka void (wxEvtHandler::*)(wxCommandEvent&)}’
+     #define wx_static_cast(t, x) static_cast<t>(x)
+                                                  ^
+/usr/include/wx-2.8/wx/event.h:96:44: note: in definition of macro ‘DECLARE_EVENT_TABLE_ENTRY’
+     wxEventTableEntry(type, winid, idLast, fn, obj)
+                                            ^
+/usr/include/wx-2.8/wx/event.h:2851:5: note: in expansion of macro ‘wx__DECLARE_EVT2’
+     wx__DECLARE_EVT2(evt, id, wxID_ANY, fn)
+     ^
+/usr/include/wx-2.8/wx/event.h:3026:31: note: in expansion of macro ‘wx__DECLARE_EVT1’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                               ^
+/usr/include/wx-2.8/wx/event.h:52:38: note: in expansion of macro ‘wx_static_cast’
+ #define wxStaticCastEvent(type, val) wx_static_cast(type, val)
+                                      ^
+/usr/include/wx-2.8/wx/event.h:2627:45: note: in expansion of macro ‘wxStaticCastEvent’
+     (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxCommandEventFunction, &func)
+                                             ^
+/usr/include/wx-2.8/wx/event.h:3026:84: note: in expansion of macro ‘wxCommandEventHandler’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                                                                                    ^
+openglcanvas.cpp:6:3: note: in expansion of macro ‘EVT_MENU’
+   EVT_MENU(EVT_SIZE, OpenGLCanvas::OnSize)
+   ^
+/usr/include/wx-2.8/wx/defs.h:313:50: error: invalid static_cast from type ‘void (OpenGLCanvas::*)(wxEraseEvent&)’ to type ‘wxCommandEventFunction {aka void (wxEvtHandler::*)(wxCommandEvent&)}’
+     #define wx_static_cast(t, x) static_cast<t>(x)
+                                                  ^
+/usr/include/wx-2.8/wx/event.h:96:44: note: in definition of macro ‘DECLARE_EVENT_TABLE_ENTRY’
+     wxEventTableEntry(type, winid, idLast, fn, obj)
+                                            ^
+/usr/include/wx-2.8/wx/event.h:2851:5: note: in expansion of macro ‘wx__DECLARE_EVT2’
+     wx__DECLARE_EVT2(evt, id, wxID_ANY, fn)
+     ^
+/usr/include/wx-2.8/wx/event.h:3026:31: note: in expansion of macro ‘wx__DECLARE_EVT1’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                               ^
+/usr/include/wx-2.8/wx/event.h:52:38: note: in expansion of macro ‘wx_static_cast’
+ #define wxStaticCastEvent(type, val) wx_static_cast(type, val)
+                                      ^
+/usr/include/wx-2.8/wx/event.h:2627:45: note: in expansion of macro ‘wxStaticCastEvent’
+     (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxCommandEventFunction, &func)
+                                             ^
+/usr/include/wx-2.8/wx/event.h:3026:84: note: in expansion of macro ‘wxCommandEventHandler’
+ #define EVT_MENU(winid, func) wx__DECLARE_EVT1(wxEVT_COMMAND_MENU_SELECTED, winid, wxCommandEventHandler(func))
+                                                                                    ^
+openglcanvas.cpp:7:3: note: in expansion of macro ‘EVT_MENU’
+   EVT_MENU(EVT_ERASE_BACKGROUND, OpenGLCanvas::OnEraseBackground)
+   ^
+make: *** [openglcanvas.o] Erreur 1

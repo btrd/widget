@@ -3,8 +3,11 @@
 
 #include "wx/wx.h"
 #include "triangle.h"
+#include "openglcanvas.h"
 
-enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_SIZE, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW };
+enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_SIZE, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS };
+
+class OpenGLCanvas;
 
 class CMainFrame: public wxFrame {
   public:
@@ -21,14 +24,14 @@ class CMainFrame: public wxFrame {
     void DeleteTriangle(int i);
 
     Triangle tab_tri [5];
+    int num_tri;
 
   private:
-
+    OpenGLCanvas *canvas;
     wxToolBar *m_toolbar;
     int currentThickness;
     wxColour *currentColor;
     bool is_drawing;
-    int num_tri;
 
   	DECLARE_EVENT_TABLE();
 

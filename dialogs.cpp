@@ -91,7 +91,6 @@ END_EVENT_TABLE ()
 TriangleDialog::TriangleDialog(CMainFrame *parent, wxWindowID id, const wxString &title) :
 wxDialog( parent, id, title) {
   p = parent;
-  //std::copy(parent->tab_tri, parent->tab_tri+5, tab_tri);
 
   wxBoxSizer *item0 = new wxBoxSizer( wxHORIZONTAL );
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
@@ -160,9 +159,10 @@ wxDialog( parent, id, title) {
   wxBoxSizer *item1 = new wxBoxSizer( wxVERTICAL );
   wxBoxSizer *item2 = new wxBoxSizer( wxHORIZONTAL );
 
-  wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("ID triangle"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
+  wxStaticText *item3 = new wxStaticText(this, ID_PROP_TEXT, wxT("ID triangle (10 char max)"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
   text = new wxTextCtrl(this, PROP_CTRL, tri.name);
+  text->SetMaxLength(10);
 
   wxStaticText *item5 = new wxStaticText(this, THICKNESS_PROP_TEXT, wxT("Thickness"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 

@@ -1,7 +1,8 @@
+
+#include <iostream>
 #include "wx/wx.h" 
 #include "mainframe.h"
 #include "dialogs.h"
-#include <iostream>
 
 class MyApp: public wxApp {
 	virtual bool OnInit();
@@ -11,7 +12,7 @@ class MyApp: public wxApp {
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit() {
-	m_MainFrame = new CMainFrame(wxString("Windows", wxConvUTF8), wxPoint(50,50), wxSize(450,340));
+	m_MainFrame = new CMainFrame(wxT("Windows"), wxPoint(50,50), wxSize(450,340));
 
 	m_MainFrame->Show(TRUE);
 
