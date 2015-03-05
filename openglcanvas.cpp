@@ -57,6 +57,7 @@ void OpenGLCanvas::Draw() {
     glVertex2i(tri.p2.x,tri.p2.y);
     glVertex2i(tri.p3.x,tri.p3.y);
     glEnd();
+    SwapBuffers();
   }
   glFlush();
 }
@@ -103,6 +104,7 @@ void OpenGLCanvas::OnMouseMove(wxMouseEvent& event) {
       glEnd();
     }
     glFlush();
+    SwapBuffers();
   }
 }
 
