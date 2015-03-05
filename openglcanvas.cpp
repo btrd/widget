@@ -139,7 +139,7 @@ void OpenGLCanvas::OnLeftUp(wxMouseEvent& event) {
       if(p->num_tri < MAX_TRI) {
         wxString s;
         s << p->num_tri+1;
-        p->tab_tri[p->num_tri].name = wxT("Triangle " + s);
+        p->tab_tri[p->num_tri].name = wxT("Tri " + s);
         p->tab_tri[p->num_tri].p1 = tri.p1;
         p->tab_tri[p->num_tri].p2 = tri.p2;
         p->tab_tri[p->num_tri].p3 = tri.p3;

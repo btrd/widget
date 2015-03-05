@@ -57,6 +57,7 @@ void CMainFrame::OnNew(wxCommandEvent& event) {
   num_tri = 0;
   wxMenuBar* menu_bar = this->GetMenuBar();
   menu_bar->Enable(MENU_TRIANGLE,false);
+  canvas->Draw();
 }
 void CMainFrame::OnOpen(wxCommandEvent& event) {
   FileDialog vdlg(this, wxT("Select a file"), wxT(""), wxT("trian.tri"), wxT("*.tri"), wxOPEN);
@@ -78,7 +79,7 @@ void CMainFrame::OnOpen(wxCommandEvent& event) {
 
     std::string tmp;
     fo >> tmp;
-    tri.name = wxString::FromUTF8(tmp.c_str());
+    tri.name = replaceUnderscore(tmp);
     fo >> tri.p1.x >> tri.p1.y >> tri.p2.x >> tri.p2.y >> tri.p3.x >> tri.p3.y;
     int r, g, b;
     fo >> r >> g >> b;
@@ -112,8 +113,8 @@ void CMainFrame::OnSave(wxCommandEvent& event) {
   fs << num_tri << std::endl << std::endl;
   for (int i = 0; i < num_tri; ++i) {
     Triangle tri = tab_tri[i];
-
-    fs << tri.name.mb_str() << std::endl;
+    std::string n = replaceSpace(tri.name);
+    fs << n << std::endl;
     fs << tri.p1.x << " " << tri.p1.y << " " << tri.p2.x << " " << tri.p2.y << " " << tri.p3.x << " " << tri.p3.y << std::endl;
     fs << (int)tri.colour.Red() << " " << (int)tri.colour.Green() << " " << (int)tri.colour.Blue() << std::endl;
     fs << tri.thickness << std::endl << std::endl;
@@ -172,4 +173,24 @@ void CMainFrame::DeleteTriangle(int i) {
     wxMenuBar* menu_bar = this->GetMenuBar();
     menu_bar->Enable(MENU_TRIANGLE,false);
   }
+}
+
+std::string CMainFrame::replaceSpace(wxString s) {
+  std::string str = std::string(s.mb_str());
+  for(std::string::iterator it = str.begin(); it != str.end(); ++it) {
+      if(*it == ' ') {
+          *it = '_';
+      }
+  }
+  return str;
+}
+
+wxString CMainFrame::replaceUnderscore(std::string s) {
+  for(std::string::iterator it = s.begin(); it != s.end(); ++it) {
+      if(*it == '_') {
+          *it = ' ';
+      }
+  }
+  wxString std(s.c_str(), wxConvUTF8);
+  return std;
 }

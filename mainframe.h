@@ -42,6 +42,9 @@ class CMainFrame: public wxFrame {
     void OnHelp(wxCommandEvent& event);
     void OnToolbar(wxCommandEvent& event);
     void OnDraw(wxCommandEvent& event);
+
+    std::string replaceSpace(wxString s);
+    wxString replaceUnderscore(std::string s);
 };
 
 #endif
