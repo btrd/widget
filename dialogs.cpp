@@ -70,7 +70,7 @@ wxDialog( parent, id, title) {
 
   if (parent->currentColor->Red() == 255 )
     select = 0;
-  else if (parent->currentColor->Green() == 128 )
+  else if (parent->currentColor->Green() == 255 )
     select = 1;
   else if (parent->currentColor->Blue() == 255 )
     select = 2;

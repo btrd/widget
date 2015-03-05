@@ -142,7 +142,7 @@ void OpenGLCanvas::OnLeftUp(wxMouseEvent& event) {
           wxMenuBar* menu_bar = p->GetMenuBar();
           menu_bar->Enable(MENU_TRIANGLE,true);
         }
-        p->canvas->Draw();
+        this->Draw();
       }
       else {
         std::cout << "tableau full ! not saving" << std::endl;
