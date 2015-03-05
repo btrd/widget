@@ -18,11 +18,10 @@ class VersionDialog: public wxDialog {
 class ThicknessDialog: public wxDialog {
   public:
     ThicknessDialog(CMainFrame *parent, wxWindowID id, const wxString &title);
-    int getThickness();
+    wxSlider *thicknessSlider;
 
   private:
     DECLARE_EVENT_TABLE();
-    wxSlider *thicknessSlider;
 };
 
 class ColorDialog: public wxDialog {

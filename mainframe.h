@@ -8,23 +8,17 @@
 
 enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_THICKNESS, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_HELP, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS, POPUP_PROP, POPUP_DELETE };
 
+const int MAX_TRI = 50;
+
 class OpenGLCanvas;
 
 class CMainFrame: public wxFrame {
   public:
   	CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
     void CreateMyToolbar();
-    void ShowToolbar();
-    void HideToolbar();
-    bool GetVisibility();
-    int getThickness();
-    void setThickness(int e);
-    wxColour* getCouleur();
-    void setCouleur(wxColour* c);
-    bool getDrawing();
     void DeleteTriangle(int i);
 
-    Triangle tab_tri [5];
+    Triangle tab_tri [MAX_TRI];
     int num_tri;
     int currentThickness;
     bool is_drawing;

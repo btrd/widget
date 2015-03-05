@@ -136,7 +136,7 @@ void OpenGLCanvas::OnLeftUp(wxMouseEvent& event) {
       tri.p3.x=event.GetX()-w/2;
       tri.p3.y=-event.GetY()+h/2;
 
-      if(p->num_tri<5) {
+      if(p->num_tri < MAX_TRI) {
         wxString s;
         s << p->num_tri+1;
         p->tab_tri[p->num_tri].name = wxT("Triangle " + s);

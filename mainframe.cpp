@@ -29,26 +29,6 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
   num_tri = 0;
 }
 
-int CMainFrame::getThickness() {
-  return currentThickness;
-}
-
-void CMainFrame::setThickness(int e) {
-  currentThickness = e;
-}
-
-wxColour* CMainFrame::getCouleur() {
-  return currentColor;
-}
-
-void CMainFrame::setCouleur(wxColour* c) {
-  currentColor = c;
-}
-
-bool CMainFrame::getDrawing() {
-  return currentThickness;
-}
-
 void CMainFrame::CreateMyToolbar() {
   m_toolbar=CreateToolBar(wxNO_BORDER | wxTB_HORIZONTAL, TOOLBAR_TOOLS);
   
@@ -71,17 +51,6 @@ void CMainFrame::CreateMyToolbar() {
   m_toolbar->Realize();
   SetToolBar(m_toolbar);
   canvas = new OpenGLCanvas(this, CANVAS, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas") );
-}
-
-void CMainFrame::ShowToolbar() {
-  m_toolbar->Show();
-}
-
-void CMainFrame::HideToolbar() {
-  m_toolbar->Hide();
-}
-bool CMainFrame::GetVisibility() {
-  return m_toolbar->IsShownOnScreen();
 }
 
 void CMainFrame::OnNew(wxCommandEvent& event) {
@@ -157,12 +126,12 @@ void CMainFrame::OnQuit(wxCommandEvent& event) {
 void CMainFrame::OnSize(wxCommandEvent& event) {
   ThicknessDialog vdlg(this, -1, wxT("Thickness"));
   vdlg.ShowModal();
-  this->setThickness(vdlg.getThickness());
+  this->currentThickness = vdlg.thicknessSlider->GetValue();
 }
 void CMainFrame::OnColor(wxCommandEvent& event) {
   ColorDialog vdlg(this, -1, wxT("Couleur"));
   vdlg.ShowModal();
-  this->setCouleur(vdlg.getColor());
+  this->currentColor = vdlg.getColor();
 }
 void CMainFrame::OnTriangle(wxCommandEvent& event) {
   TriangleDialog vdlg(this, -1, wxT("Triangle"));
@@ -186,10 +155,10 @@ void CMainFrame::OnHelp(wxCommandEvent& event) {
   help.DisplayContents();
 }
 void CMainFrame::OnToolbar(wxCommandEvent& event) {
-  if (GetVisibility()) {
-    HideToolbar();
+  if (m_toolbar->IsShownOnScreen()) {
+    m_toolbar->Hide();
   } else {
-    ShowToolbar();
+    m_toolbar->Show();
   }
 }
 void CMainFrame::OnDraw(wxCommandEvent& event) {

@@ -17,7 +17,7 @@ wxDialog( parent, id, title) {
 
   wxStaticText *item1 = new wxStaticText(this, VERSION_TEXT, wxT("Version 1.0"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 
-  wxButton *item2 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
+  wxButton *item2 = new wxButton(this, wxID_OK, wxT("Ok"), wxDefaultPosition);
 
   item0->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( item2, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -39,7 +39,7 @@ wxDialog( parent, id, title) {
   
   thicknessSlider = new wxSlider(this, THICKNESS_SLIDER, parent->currentThickness, 1, 10, wxDefaultPosition, wxSize(200, 50), wxSL_LABELS);
 
-  wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
+  wxButton *item3 = new wxButton(this, wxID_OK, wxT("Ok"), wxDefaultPosition);
 
   item0->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( thicknessSlider, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -49,9 +49,6 @@ wxDialog( parent, id, title) {
   this->SetSizer( item0 );
   item0->Fit( this );
   item0->SetSizeHints( this );
-}
-int ThicknessDialog::getThickness() {
-  return thicknessSlider->GetValue();
 }
 
 BEGIN_EVENT_TABLE(ColorDialog, wxDialog)
@@ -77,7 +74,7 @@ wxDialog( parent, id, title) {
 
   colorRadio->SetSelection(select);
 
-  wxButton *item3 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
+  wxButton *item3 = new wxButton(this, wxID_OK, wxT("Ok"), wxDefaultPosition);
 
   item0->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( colorRadio, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -117,7 +114,7 @@ wxDialog( parent, id, title) {
 
   wxButton *item5 = new wxButton(this, BUTTON_PROP, wxT("Properties"), wxDefaultPosition);
   wxButton *item6 = new wxButton(this, BUTTON_DELETE, wxT("Delete"), wxDefaultPosition);
-  wxButton *item7 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
+  wxButton *item7 = new wxButton(this, wxID_OK, wxT("Ok"), wxDefaultPosition);
 
   item2->Add( item5, 0, wxALIGN_CENTRE|wxALL, 5 );
   item2->Add( item6, 0, wxALIGN_CENTRE|wxALL, 5 );
@@ -203,7 +200,7 @@ wxDialog( parent, id, title) {
   item2->Add( item1, 0, wxALIGN_CENTRE|wxALL, 5 );
   item2->Add( radio, 0, wxALIGN_CENTRE|wxALL, 5 );
 
-  wxButton *item8 = new wxButton(this, wxID_OK, wxT("OK"), wxDefaultPosition);
+  wxButton *item8 = new wxButton(this, wxID_OK, wxT("Ok"), wxDefaultPosition);
 
   item0->Add( item2, 0, wxALIGN_CENTRE|wxALL, 5 );
   item0->Add( item8, 0, wxALIGN_CENTRE|wxALL, 5 );
