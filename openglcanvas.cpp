@@ -17,6 +17,7 @@ END_EVENT_TABLE()
 
 OpenGLCanvas::OpenGLCanvas(CMainFrame *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style,const wxString& name): wxGLCanvas(parent, id, pos, size, style, name) {
   p = parent;
+  click = 0;
 }
 
 void OpenGLCanvas::OnPaint( wxPaintEvent& event ) {
@@ -66,6 +67,7 @@ void OpenGLCanvas::OnSize( wxSizeEvent& event ) {
   wxGLCanvas::OnSize(event);
   int w, h;
   GetClientSize(&w, &h);
+  //glViewport(0, 0, (GLint) w, (GLint) h);
 }
 
 void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event ) {

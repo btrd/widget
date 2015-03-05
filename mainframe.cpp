@@ -26,7 +26,6 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
   currentColor = new wxColour(wxT("red"));
   is_drawing = FALSE;
   num_tri = 0;
-  canvas = new OpenGLCanvas(this, CANVAS, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas") );
 }
 
 int CMainFrame::getThickness() {
@@ -70,6 +69,7 @@ void CMainFrame::CreateMyToolbar() {
 
   m_toolbar->Realize();
   SetToolBar(m_toolbar);
+  canvas = new OpenGLCanvas(this, CANVAS, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas") );
 }
 
 void CMainFrame::ShowToolbar() {
