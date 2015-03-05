@@ -1,3 +1,4 @@
+#include "wx/wx.h"
 #include "triangle.h"
 
 bool Triangle::IsPointInTriangle(int x, int y) {

@@ -3,6 +3,8 @@
 #include "openglcanvas.h"
 #include "GL/gl.h"
 #include "mainframe.h"
+#include "triangle.h"
+#include "dialogs.h"
 
 BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
   EVT_PAINT(OpenGLCanvas::OnPaint)
@@ -13,11 +15,14 @@ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
   EVT_LEFT_DOWN(OpenGLCanvas::OnLeftDown)
   EVT_LEFT_UP(OpenGLCanvas::OnLeftUp)
   EVT_RIGHT_DOWN(OpenGLCanvas::OnRightDown)
+  EVT_MENU(POPUP_PROP, OpenGLCanvas::OnProp)
+  EVT_MENU(POPUP_DELETE, OpenGLCanvas::OnDelete)
 END_EVENT_TABLE()
 
 OpenGLCanvas::OpenGLCanvas(CMainFrame *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style,const wxString& name): wxGLCanvas(parent, id, pos, size, style, name) {
   p = parent;
   click = 0;
+  selectTriangle = -1;
 }
 
 void OpenGLCanvas::OnPaint( wxPaintEvent& event ) {
@@ -161,20 +166,63 @@ void OpenGLCanvas::OnLeftDown(wxMouseEvent& event) {
 }
 
 void OpenGLCanvas::OnRightDown(wxMouseEvent& event) {
-  //if(IsPointInTriangle())
-  wxMenu popupMenu;
+  int w, h;
+  GetClientSize(&w, &h);
+  int x = event.GetX()-w/2;
+  int y =- event.GetY()+h/2;
+  selectTriangle = InTriangle(x, y);
+  if(selectTriangle > -1) {
+    wxMenu popupMenu;
 
-  popupMenu.Append(MENU_OPEN, wxT("Open file"));
-  popupMenu.Append(MENU_SAVE, wxT("Save file"));
+    popupMenu.Append(POPUP_PROP, wxT("Propriety triangle"));
+    popupMenu.Append(POPUP_DELETE, wxT("Delete triangle"));
 
-  popupMenu.AppendSeparator();
+    PopupMenu( &popupMenu, event.GetX(), event.GetY() );
+  } else {
+    wxMenu popupMenu;
 
-  popupMenu.Append(MENU_COLOR, wxT("Current colour"));
-  popupMenu.Append(MENU_THICKNESS, wxT("Current thickness"));
+    popupMenu.Append(MENU_OPEN, wxT("Open file"));
+    popupMenu.Append(MENU_SAVE, wxT("Save file"));
 
-  popupMenu.AppendSeparator();
+    popupMenu.AppendSeparator();
 
-  popupMenu.Append(MENU_TRIANGLE, wxT("Manage triangles"));
+    popupMenu.Append(MENU_COLOR, wxT("Current colour"));
+    popupMenu.Append(MENU_THICKNESS, wxT("Current thickness"));
 
-  PopupMenu( &popupMenu, event.GetX(), event.GetY() );
+    popupMenu.AppendSeparator();
+
+    popupMenu.Append(MENU_TRIANGLE, wxT("Manage triangles"));
+
+    PopupMenu( &popupMenu, event.GetX(), event.GetY() );
+  }
+}
+
+int OpenGLCanvas::InTriangle(int x, int y) {
+  for (int i = 0; i < p->num_tri; ++i) {
+    Triangle tri = p->tab_tri[i];
+    if(tri.IsPointInTriangle(x, y))
+      return i;
+  }
+  return -1;
+}
+
+void OpenGLCanvas::OnDelete(wxCommandEvent& event) {
+  if (selectTriangle > -1) {
+    p->DeleteTriangle(selectTriangle);
+    p->canvas->Draw();
+  }
+}
+
+void OpenGLCanvas::OnProp(wxCommandEvent& event) {
+  if(selectTriangle > -1) {
+    PropDialog vdlg(this, -1, wxT("Properties"), selectTriangle, p->tab_tri[selectTriangle]);
+    vdlg.ShowModal();
+    Triangle tri = p->tab_tri[selectTriangle];
+    tri.name = vdlg.text->GetValue();
+    tri.thickness = vdlg.spin->GetValue();
+    wxString t = vdlg.radio->GetStringSelection();
+    tri.colour = wxColour(t);
+    p->tab_tri[selectTriangle] = tri;
+    p->canvas->Draw();
+  }
 }

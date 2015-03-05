@@ -176,10 +176,6 @@ void CMainFrame::OnTriangle(wxCommandEvent& event) {
     lb->Append(tab_tri[i].name);
   }
   vdlg.ShowModal();
-  if (num_tri == 0) {
-    wxMenuBar* menu_bar = this->GetMenuBar();
-    menu_bar->Enable(MENU_TRIANGLE,false);
-  }
 }
 void CMainFrame::OnVersion(wxCommandEvent& event) {
   VersionDialog vdlg(this, -1, wxT("Version"));
@@ -199,4 +195,8 @@ void CMainFrame::OnDraw(wxCommandEvent& event) {
 void CMainFrame::DeleteTriangle(int i) {
   std::copy(tab_tri + i + 1, tab_tri + num_tri, tab_tri + i);
   num_tri--;
+  if (num_tri == 0) {
+    wxMenuBar* menu_bar = this->GetMenuBar();
+    menu_bar->Enable(MENU_TRIANGLE,false);
+  }
 }

@@ -7,8 +7,6 @@
 
 class CMainFrame;
 
-enum {POPUP_MANAGE, POPUP_FILE, POPUP_VALUE};
-
 class OpenGLCanvas: public wxGLCanvas {
   public:
     OpenGLCanvas(CMainFrame *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxString& name);
@@ -17,6 +15,7 @@ class OpenGLCanvas: public wxGLCanvas {
     CMainFrame *p;
     int click;
     Triangle tri;
+    int selectTriangle;
 
     DECLARE_EVENT_TABLE();
     void OnPaint(wxPaintEvent& event);
@@ -26,6 +25,9 @@ class OpenGLCanvas: public wxGLCanvas {
     void OnLeftUp(wxMouseEvent& event);
     void OnLeftDown(wxMouseEvent& event);
     void OnRightDown(wxMouseEvent& event);
+    int InTriangle(int x, int y);
+    void OnDelete(wxCommandEvent& event);
+    void OnProp(wxCommandEvent& event);
 };
 
 #endif

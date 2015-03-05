@@ -1,7 +1,7 @@
 CC = g++
 
-drawtri : main.o mainframe.o dialogs.o openglcanvas.o
-	$(CC) -o drawtri main.o mainframe.o dialogs.o openglcanvas.o `wx-config --libs --gl-libs` -lGL
+drawtri : main.o mainframe.o dialogs.o openglcanvas.o triangle.o
+	$(CC) -o drawtri main.o mainframe.o dialogs.o openglcanvas.o triangle.o `wx-config --libs --gl-libs` -lGL
 
 main.o : main.cpp 
 	$(CC) `wx-config --cxxflags` -c main.cpp -o main.o
@@ -14,6 +14,9 @@ dialogs.o : dialogs.cpp
 
 openglcanvas.o : openglcanvas.cpp
 	$(CC) `wx-config --cxxflags` -c openglcanvas.cpp -o openglcanvas.o
+
+triangle.o : triangle.cpp
+	$(CC) `wx-config --cxxflags` -c triangle.cpp -o triangle.o
 
 clean : 
 	rm -f *.o drawtri
