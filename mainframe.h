@@ -1,11 +1,12 @@
 #ifndef __MAINFRAME_H__
 #define __MAINFRAME_H__
 
+#include <wx/html/helpctrl.h>
 #include "wx/wx.h"
 #include "triangle.h"
 #include "openglcanvas.h"
 
-enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_THICKNESS, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS, POPUP_PROP, POPUP_DELETE };
+enum { MENU_NEW, MENU_OPEN, MENU_SAVE, MENU_QUIT, MENU_THICKNESS, MENU_COLOR, MENU_TRIANGLE, MENU_VERSION, MENU_HELP, MENU_TOOLBAR, TOOLBAR_TOOLS, MENU_DRAW, CANVAS, POPUP_PROP, POPUP_DELETE };
 
 class OpenGLCanvas;
 
@@ -29,6 +30,7 @@ class CMainFrame: public wxFrame {
     bool is_drawing;
     OpenGLCanvas *canvas;
     wxColour *currentColor;
+    wxHtmlHelpController help;
 
   private:
     wxToolBar *m_toolbar;
@@ -43,9 +45,9 @@ class CMainFrame: public wxFrame {
     void OnColor(wxCommandEvent& event);
     void OnTriangle(wxCommandEvent& event);
     void OnVersion(wxCommandEvent& event);
+    void OnHelp(wxCommandEvent& event);
     void OnToolbar(wxCommandEvent& event);
     void OnDraw(wxCommandEvent& event);
-    void OnColor1(wxCommandEvent& event);
 };
 
 #endif

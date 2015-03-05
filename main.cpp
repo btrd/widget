@@ -1,7 +1,6 @@
 #include <iostream>
 #include "wx/wx.h" 
 #include "mainframe.h"
-#include "dialogs.h"
 
 class MyApp: public wxApp {
 	virtual bool OnInit();
@@ -40,6 +39,7 @@ bool MyApp::OnInit() {
   menu_bar->Enable(MENU_TRIANGLE,false);
 
   help_menu->Append(MENU_VERSION, wxT("Version"));
+  help_menu->Append(MENU_HELP, wxT("Open help"));
  
   display_menu->AppendCheckItem(MENU_TOOLBAR, wxT("Toolbar"));
   display_menu->Check(MENU_TOOLBAR,TRUE);
@@ -47,6 +47,11 @@ bool MyApp::OnInit() {
   m_MainFrame->SetMenuBar(menu_bar);
 
   m_MainFrame->CreateMyToolbar();
+
+  if ( !m_MainFrame->help.Initialize(wxT("HELP"))) {
+    wxLogError(wxT("Cannot initialize the help system, aborting."));
+    return FALSE;
+  }
 
   return TRUE;
 } 

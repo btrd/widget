@@ -16,6 +16,7 @@ BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
   EVT_MENU(MENU_COLOR, CMainFrame::OnColor)
   EVT_MENU(MENU_TRIANGLE, CMainFrame::OnTriangle)
   EVT_MENU(MENU_VERSION, CMainFrame::OnVersion)
+  EVT_MENU(MENU_HELP, CMainFrame::OnHelp)
   EVT_MENU(MENU_TOOLBAR, CMainFrame::OnToolbar)
   EVT_MENU(MENU_DRAW, CMainFrame::OnDraw)
 END_EVENT_TABLE()
@@ -180,6 +181,9 @@ void CMainFrame::OnTriangle(wxCommandEvent& event) {
 void CMainFrame::OnVersion(wxCommandEvent& event) {
   VersionDialog vdlg(this, -1, wxT("Version"));
   vdlg.ShowModal();
+}
+void CMainFrame::OnHelp(wxCommandEvent& event) {
+  help.DisplayContents();
 }
 void CMainFrame::OnToolbar(wxCommandEvent& event) {
   if (GetVisibility()) {
